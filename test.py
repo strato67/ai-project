@@ -15,7 +15,8 @@ with open('coordinates.csv', 'r') as f2:
 coordinateList = list(filter(None,coordinateList))
 
 ############################################################################################################kill me now
-print(list(reversed(coordinateList[0])))
+print(coordinateList)
+#print(list(reversed(coordinateList[0])))
 
 point = Point(-79.41, 43.73)
 

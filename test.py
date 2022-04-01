@@ -1,24 +1,29 @@
-import folium
-import requests
-import pandas as pd
+import json
+import csv
+from shapely.geometry import shape, Polygon, Point
 
-m = folium.Map(location=[43.6532, -79.3832],
-           zoom_start=12,
-           tiles='https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
-           attr='My Data Attribution')
+with open('Neighbourhoods.geojson', 'r') as f:
+    js = json.load(f)
 
-geoJSON = r".\Neighbourhoods.geojson"
+coordinateList = []
+with open('coordinates.csv', 'r') as f2:
+    reader = csv.reader(f2, skipinitialspace=True)
+    for row in reader:
+        
+        coordinateList.append(row)
 
-folium.GeoJson(geoJSON, name="geojson").add_to(m)
-crimeRate = requests.get("https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/services/Neighbourhood_MCI/FeatureServer/0/query?where=1%3D1&outFields=Neighbourhood,Hood_ID,Population,Shape__Area,Shape__Length,Assault_AVG,AutoTheft_AVG,BreakandEnter_AVG,Homicide_AVG,Robbery_AVG,TheftOver_AVG&outSR=4326&f=json")
+coordinateList = list(filter(None,coordinateList))
 
+############################################################################################################kill me now
+print(list(reversed(coordinateList[0])))
 
+point = Point(-79.41, 43.73)
 
+for feature in js['features']:
 
-
-
-
-m.save("index.html")
-
-
-#print(crimeRate.text)
+    polygon = shape(feature['geometry'])
+    #print(polygon)
+    
+    if polygon.contains(point):
+        print(feature['properties']['AREA_SHORT_CODE'])
+    

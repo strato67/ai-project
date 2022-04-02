@@ -36,7 +36,6 @@ for feature in js['features']:
     
     for i in range(len(coordinateList)):
         if polygon.contains(coordinateList[i]):
-            #print(feature['properties']['AREA_SHORT_CODE'])
 
             for j in range(len(areaCodewithNumCoord)):
                 if areaCodewithNumCoord[j][0]==feature['properties']['AREA_SHORT_CODE']:

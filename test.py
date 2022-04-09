@@ -35,14 +35,18 @@ for feature in js['features']:
     polygon = shape(feature['geometry'])
     
     for i in range(len(coordinateList)):
+        #If polygon contains starbuck cooridinate from api call, add, otherwise discard
         if polygon.contains(coordinateList[i]):
 
             for j in range(len(areaCodewithNumCoord)):
+
+                #Iterate through area code and tally array, if found add to tally
                 if areaCodewithNumCoord[j][0]==feature['properties']['AREA_SHORT_CODE']:
                     areaCodewithNumCoord[j][1]=areaCodewithNumCoord[j][1]+1
 
 areaCodewithNumCoord.insert(0,['Neighbourhood_ID','Number_Starbucks'])
 
+#Cleaned data, will write to areacode with num of starbucks file
 with open('areaCodeNum.csv', 'w', newline="") as f3:
     writer = csv.writer(f3)
     writer.writerows(areaCodewithNumCoord)

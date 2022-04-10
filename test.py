@@ -44,7 +44,7 @@ for feature in js['features']:
                 if areaCodewithNumCoord[j][0]==feature['properties']['AREA_SHORT_CODE']:
                     areaCodewithNumCoord[j][1]=areaCodewithNumCoord[j][1]+1
 
-areaCodewithNumCoord.insert(0,['Neighbourhood_ID','Number_Starbucks'])
+areaCodewithNumCoord.insert(0,['Neighbourhood_ID','Number_CoffeeShop'])
 
 #Cleaned data, will write to areacode with num of starbucks file
 with open('areaCodeNum.csv', 'w', newline="") as f3:
